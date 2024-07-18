@@ -28,26 +28,19 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    private suspend fun getRates(base: String): Map<String, Double> = withContext(Dispatchers.IO) {
+    private suspend fun getRates(base: String): Map<String, Double> {
         val currentTime = System.currentTimeMillis()
         cache[base]?.let { (rates, timestamp) ->
             if (currentTime - timestamp < cacheExpiration) {
-                return@withContext rates
+                return rates
             }
         }
 
-        return@withContext try {
-            val response = RetrofitClient.api.getLatestRates(RetrofitClient.getApiKey(), base)
-            if (response.success == true) {
-                cache[base] = Pair(response.rates, currentTime)
-                response.rates
-            } else {
-                null
-            }
-        } catch (e: Exception) {
-            throw Exception("Network error: ${e.localizedMessage}")
-        }!!
+        val response = RetrofitClient.api.getLatestRates(RetrofitClient.getApiKey(), base)
+        cache[base] = Pair(response.rates, currentTime)
+        return response.rates
     }
+}
 
 
 sealed class ConversionResult {
@@ -56,4 +49,3 @@ sealed class ConversionResult {
     data class Success(val result: Double) : ConversionResult()
     data class Error(val message: String) : ConversionResult()
 }
-    }
