@@ -74,22 +74,23 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.conversionResult.collect { result ->
                 when (result) {
-                    is ConversionResult.Initial -> {
+                    is MainViewModel.ConversionResult.Initial -> {
                         resultTextView.text = ""
                         loadingProgressBar.visibility = View.GONE
                     }
-                    is ConversionResult.Loading -> {
+                    is MainViewModel.ConversionResult.Loading -> {
                         loadingProgressBar.visibility = View.VISIBLE
                         resultTextView.text = ""
                     }
-                    is ConversionResult.Success -> {
+                    is MainViewModel.ConversionResult.Success -> {
                         loadingProgressBar.visibility = View.GONE
                         resultTextView.text = String.format("%.2f", result.result)
                     }
-                    is ConversionResult.Error -> {
+                    is MainViewModel.ConversionResult.Error -> {
                         loadingProgressBar.visibility = View.GONE
                         resultTextView.text = result.message
-                    }
+                        // Можно добавить более подробное описание ошибки здесь
+                        }
                     else -> {
                         Log.e("MainActivity", "Unexpected ConversionResult state")
                         loadingProgressBar.visibility = View.GONE

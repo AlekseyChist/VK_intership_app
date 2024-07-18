@@ -5,5 +5,8 @@ import retrofit2.http.Query
 
 interface ExchangeRateApi {
     @GET("latest")
-    suspend fun getLatestRates(@Query("base") base: String): ExchangeRatesResponse
+    suspend fun getLatestRates(
+        @Query("apikey") apiKey: String,
+        @Query("base") base: String
+    ): ExchangeRatesResponse
 }
