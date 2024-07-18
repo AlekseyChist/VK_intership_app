@@ -17,15 +17,13 @@ class MainViewModel : ViewModel() {
         viewModelScope.launch {
             _conversionResult.value = ConversionResult.Loading
             try {
-                val rates = getRates("EUR") // Базовая валюта всегда EUR для бесплатного плана
-                val euroRate = if (from == "EUR") 1.0 else 1 / (rates[from]
-                    ?: throw Exception("Rate not found for $from"))
+                val rates = getRates(from)
+                val baseRate = rates[from] ?: 1.0
                 val targetRate = rates[to] ?: throw Exception("Rate not found for $to")
-                val result = amount * euroRate * targetRate
+                val result = amount * (targetRate / baseRate)
                 _conversionResult.value = ConversionResult.Success(result)
             } catch (e: Exception) {
-                _conversionResult.value =
-                    ConversionResult.Error("Ошибка конвертации: ${e.localizedMessage}")
+                _conversionResult.value = ConversionResult.Error("Ошибка конвертации: ${e.localizedMessage}")
             }
         }
     }
