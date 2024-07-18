@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 object RetrofitClient {
-    private const val BASE_URL = "https://api.exchangeratesapi.io/v1/"
+    private const val BASE_URL = "https://api.apilayer.com/exchangerates_data/"
     private const val API_KEY = "RH95wxyF0pxy334jLopFxMNAbtJJb87M"
 
 

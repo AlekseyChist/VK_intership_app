@@ -36,7 +36,7 @@ class MainViewModel : ViewModel() {
             }
         }
 
-        try {
+        return@withContext try {
             val response = RetrofitClient.api.getLatestRates(RetrofitClient.getApiKey(), base)
             if (response.success == true) {
                 cache[base] = Pair(response.rates, currentTime)
