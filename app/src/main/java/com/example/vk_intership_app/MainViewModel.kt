@@ -13,7 +13,7 @@ class MainViewModel : ViewModel() {
     private val cache = mutableMapOf<String, Pair<Map<String, Double>, Long>>()
     private val cacheExpiration = 60 * 60 * 1000 // 1 час в миллисекундах
 
-    suspend fun convertCurrency(amount: Double, from: String, to: String) {
+    fun convertCurrency(amount: Double, from: String, to: String) {
         viewModelScope.launch {
             _conversionResult.value = ConversionResult.Loading
             try {
