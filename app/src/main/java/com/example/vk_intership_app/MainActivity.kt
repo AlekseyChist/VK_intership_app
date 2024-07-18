@@ -1,4 +1,8 @@
+package com.example.vk_intership_app;
+
+import MainViewModel
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -41,7 +45,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupSpinners() {
-        val currencies = arrayOf("USD", "EUR", "GBP", "JPY", "CAD", "AUD", "CHF", "CNY", "SEK", "NZD")
+        val currencies =
+            arrayOf("USD", "EUR", "GBP", "JPY", "CAD", "AUD", "CHF", "CNY", "SEK", "NZD")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, currencies)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
@@ -56,7 +61,9 @@ class MainActivity : AppCompatActivity() {
             val toCurrency = toCurrencySpinner.selectedItem.toString()
 
             if (amount != null) {
-                viewModel.convertCurrency(amount, fromCurrency, toCurrency)
+                lifecycleScope.launch {
+                    viewModel.convertCurrency(amount, fromCurrency, toCurrency)
+                }
             } else {
                 resultTextView.text = "Введите корректную сумму"
             }
@@ -82,6 +89,11 @@ class MainActivity : AppCompatActivity() {
                     is ConversionResult.Error -> {
                         loadingProgressBar.visibility = View.GONE
                         resultTextView.text = result.message
+                    }
+                    else -> {
+                        Log.e("MainActivity", "Unexpected ConversionResult state")
+                        loadingProgressBar.visibility = View.GONE
+                        resultTextView.text = "Неизвестная ошибка"
                     }
                 }
             }

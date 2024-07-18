@@ -39,8 +39,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.okhttp3.okhttp)
     implementation(libs.retrofit2.retrofit.v290)
-    implementation(libs.rxjava)
-    implementation(libs.rxjava3.rxandroid)
     implementation(libs.retrofit2.adapter.rxjava3)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
