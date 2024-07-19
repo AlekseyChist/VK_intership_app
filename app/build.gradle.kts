@@ -7,6 +7,10 @@ android {
     namespace = "com.example.vk_intership_app"
     compileSdk = 34
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId = "com.example.vk_intership_app"
         minSdk = 24
