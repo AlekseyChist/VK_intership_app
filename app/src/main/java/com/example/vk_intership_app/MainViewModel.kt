@@ -18,9 +18,8 @@ class MainViewModel : ViewModel() {
             _conversionResult.value = ConversionResult.Loading
             try {
                 val rates = getRates(from)
-                val baseRate = rates[from] ?: 1.0
-                val targetRate = rates[to] ?: throw Exception("Rate not found for $to")
-                val result = amount * (targetRate / baseRate)
+                val targetRate = rates[to] ?: throw Exception("Обменный курс не найден для валюты $to")
+                val result = amount * targetRate
                 _conversionResult.value = ConversionResult.Success(result)
             } catch (e: Exception) {
                 _conversionResult.value = ConversionResult.Error("Ошибка конвертации: ${e.localizedMessage}")

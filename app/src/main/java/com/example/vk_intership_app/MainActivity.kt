@@ -80,7 +80,6 @@ class MainActivity : AppCompatActivity() {
                     is ConversionResult.Error -> {
                         binding.loadingProgressBar.visibility = View.GONE
                         binding.resultTextView.text = result.message
-                        // Можно добавить более подробное описание ошибки здесь
                         }
                     else -> {
                         Log.e("MainActivity", "Unexpected ConversionResult state")
