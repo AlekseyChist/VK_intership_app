@@ -36,5 +36,5 @@
 - `ExchangeRatesResponse`: Data class для ответа API
 - `ConversionResult`: Sealed class для представления результатов конвертации
 
-## Автор: Чистяков Алексей Олегоыич
+## Автор: Чистяков Алексей Олегович
 
