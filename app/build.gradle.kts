@@ -7,6 +7,10 @@ android {
     namespace = "com.example.vk_intership_app"
     compileSdk = 34
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId = "com.example.vk_intership_app"
         minSdk = 24
@@ -36,7 +40,14 @@ android {
 }
 
 dependencies {
-
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.okhttp3.okhttp)
+    implementation(libs.retrofit2.retrofit.v290)
+    implementation(libs.retrofit2.adapter.rxjava3)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.converter.gson)
+    implementation(libs.retrofit)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -45,4 +56,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
 }
